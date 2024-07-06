@@ -1,3 +1,4 @@
+import 'package:bus_reservation/pages/search_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,16 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lightGreen,
         brightness: Brightness.dark,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(
-            'Bus Reservation App',
-            style: TextStyle(color: Colors.black),
-          ),
-          centerTitle: true,
-        ),
-      ),
+      home: const SearchPage(),
     );
   }
 }
