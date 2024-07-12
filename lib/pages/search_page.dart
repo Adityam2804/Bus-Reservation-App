@@ -1,6 +1,9 @@
+import 'package:bus_reservation/datasource/temp_db.dart';
+import 'package:bus_reservation/providers/AppDataProvider.dart';
 import 'package:bus_reservation/utils/constants.dart';
 import 'package:bus_reservation/utils/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -112,9 +115,15 @@ class _SearchPageState extends State<SearchPage> {
 
   void _search() {
     if (departureDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please Select a Departure Date')));
+      showErrMsg(context, emptyDateErrMsg);
     }
-    if (_formKey.currentState!.validate()) {}
+    if (_formKey.currentState!.validate()) {
+      Provider.of<Appdataprovider>(context, listen: false)
+          .getBusRouteFromCityToCity(fromCity!, toCity!)
+          .then((route) {
+        Navigator.pushNamed(context, routeNameSearchResultPage,
+            arguments: [route, dateFormater(departureDate!)]);
+      });
+    }
   }
 }
