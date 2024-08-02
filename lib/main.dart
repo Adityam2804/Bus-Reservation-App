@@ -1,5 +1,7 @@
+import 'package:bus_reservation/pages/booking_confirmation_page.dart';
 import 'package:bus_reservation/pages/search_page.dart';
 import 'package:bus_reservation/pages/search_result.dart';
+import 'package:bus_reservation/pages/seat_plan.dart';
 import 'package:bus_reservation/providers/AppDataProvider.dart';
 import 'package:bus_reservation/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
       home: const SearchPage(),
       routes: {
         routeNameHome: (context) => const SearchPage(),
-        routeNameSearchResultPage: (context) => const SearchResult()
+        routeNameSearchResultPage: (context) => const SearchResult(),
+        routeNameSeatPlanPage: (context) => const SeatPlan(),
+        routeNameBookingConfirmationPage: (context) =>
+            const BookingConfirmationPage()
       },
     );
   }

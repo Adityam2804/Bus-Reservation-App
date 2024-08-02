@@ -62,7 +62,8 @@ class SearchListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, routeNameSeatPlanPage,
+          arguments: [busSchedule, date]),
       child: Card(
         child: Column(
           children: [
