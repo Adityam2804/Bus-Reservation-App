@@ -41,6 +41,9 @@ class _SeatPlanState extends State<SeatPlan> {
         await Provider.of<Appdataprovider>(context, listen: false)
             .getReservationsByScheduleAndDepartureDate(
                 busSchedule.scheduleId!, departureDate);
+    setState(() {
+      isDataLoading = false;
+    });
     for (BusReservation res in reservations) {
       totalSeatBooked += res.totalSeatBooked;
       seats.add(res.seatNumbers);
@@ -103,22 +106,25 @@ class _SeatPlanState extends State<SeatPlan> {
                       'Selected: $value',
                       style: const TextStyle(fontSize: 16),
                     )),
-            Expanded(
-                child: SingleChildScrollView(
-              child: SeatPlanView(
-                  totalSeats: busSchedule.bus.totalSeat,
-                  bookedSeatNumbers: bookedSeatNumbers,
-                  totalSeatsBooked: totalSeatBooked,
-                  isBusinessClass: busSchedule.bus.busType == busTypeACBusiness,
-                  onSelected: (value, seat) {
-                    if (value) {
-                      selectedSeats.add(seat);
-                    } else {
-                      selectedSeats.remove(seat);
-                    }
-                    selectedSeatStringNotifier.value = selectedSeats.join(',');
-                  }),
-            )),
+            if (!isDataLoading)
+              Expanded(
+                  child: SingleChildScrollView(
+                child: SeatPlanView(
+                    totalSeats: busSchedule.bus.totalSeat,
+                    bookedSeatNumbers: bookedSeatNumbers,
+                    totalSeatsBooked: totalSeatBooked,
+                    isBusinessClass:
+                        busSchedule.bus.busType == busTypeACBusiness,
+                    onSelected: (value, seat) {
+                      if (value) {
+                        selectedSeats.add(seat);
+                      } else {
+                        selectedSeats.remove(seat);
+                      }
+                      selectedSeatStringNotifier.value =
+                          selectedSeats.join(',');
+                    }),
+              )),
             OutlinedButton(
                 onPressed: () {
                   if (selectedSeats.isEmpty) {

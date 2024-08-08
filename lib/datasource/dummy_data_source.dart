@@ -7,6 +7,7 @@ import 'package:bus_reservation/models/bus_reservation.dart';
 import 'package:bus_reservation/models/bus_schedule.dart';
 import 'package:bus_reservation/models/but_route.dart';
 import 'package:bus_reservation/models/response_model.dart';
+import 'package:bus_reservation/utils/constants.dart';
 
 class DummyDataSource extends DataSource {
   @override
@@ -16,9 +17,13 @@ class DummyDataSource extends DataSource {
   }
 
   @override
-  Future<ResponseModel> addReservation(BusReservation reservation) {
-    // TODO: implement addReservation
-    throw UnimplementedError();
+  Future<ResponseModel> addReservation(BusReservation reservation) async {
+    TempDB.tableReservation.add(reservation);
+    return ResponseModel(
+        responseStatus: ResponseStatus.SAVED,
+        statusCode: 200,
+        message: 'Reservation Added Successfully',
+        object: {});
   }
 
   @override
