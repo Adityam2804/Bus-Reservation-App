@@ -1,4 +1,5 @@
 import 'package:bus_reservation/datasource/temp_db.dart';
+import 'package:bus_reservation/drawers/main_drawer.dart';
 import 'package:bus_reservation/providers/AppDataProvider.dart';
 import 'package:bus_reservation/utils/constants.dart';
 import 'package:bus_reservation/utils/helper_functions.dart';
@@ -16,9 +17,11 @@ class _SearchPageState extends State<SearchPage> {
   String? fromCity, toCity;
   DateTime? departureDate;
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const MainDrawer(),
       appBar: AppBar(
         title: const Text('Search Page'),
       ),

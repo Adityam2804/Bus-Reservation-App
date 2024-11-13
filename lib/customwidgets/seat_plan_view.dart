@@ -20,13 +20,17 @@ class SeatPlanView extends StatelessWidget {
   Widget build(BuildContext context) {
     final noOfRows =
         (isBusinessClass ? totalSeats / 3 : totalSeats / 4).toInt();
-    final noOfColumns = (isBusinessClass ? 3 : 4);
+    final noOfColumns = (isBusinessClass ? 3 : 4).toInt();
     List bookedSeats =
         bookedSeatNumbers.isEmpty ? [] : bookedSeatNumbers.split(',');
     List<List<String>> seatArrangement = [];
     for (int i = 0; i < noOfRows; i++) {
       List<String> columns = [];
+      print(noOfRows);
+      print(noOfColumns);
       for (int j = 0; j < noOfColumns; j++) {
+        print(i);
+        print(j);
         columns.add('${seatLabelList[i]}${j + 1}');
       }
       seatArrangement.add(columns);
